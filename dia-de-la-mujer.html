@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 de Marzo — Día Internacional de la Mujer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rose:     #c0304a;
+    --blush:    #f2a7bb;
+    --cream:    #fdf6f0;
+    --gold:     #c9a84c;
+    --deep:     #1a0a10;
+    --lilac:    #d4a0c0;
+    --magenta:  #9b2354;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── PARTICLES BG ── */
+  #particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+    10%  { opacity: .7; }
+    90%  { opacity: .4; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem 4rem;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 10%, rgba(192,48,74,.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(155,35,84,.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 70%, rgba(212,160,192,.15) 0%, transparent 60%);
+    z-index: -1;
+  }
+
+  .date-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,.4);
+    border-radius: 2rem;
+    padding: .4rem 1.2rem;
+    margin-bottom: 2rem;
+    animation: fadeUp .8s ease both;
+  }
+
+  .big-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(7rem, 28vw, 14rem);
+    font-weight: 900;
+    line-height: .85;
+    letter-spacing: -.02em;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--rose) 40%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeUp .9s .1s ease both;
+    position: relative;
+  }
+  .big-number::after {
+    content: '8';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--rose) 40%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(28px);
+    opacity: .5;
+    z-index: -1;
+  }
+
+  .month-line {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 5vw, 2.2rem);
+    color: var(--blush);
+    letter-spacing: .1em;
+    margin-top: .5rem;
+    animation: fadeUp 1s .2s ease both;
+  }
+
+  .divider-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.8rem auto;
+    animation: fadeUp 1s .3s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 6vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 480px;
+    animation: fadeUp 1s .4s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(.95rem, 3.5vw, 1.3rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(253,246,240,.7);
+    max-width: 380px;
+    margin-top: 1.2rem;
+    animation: fadeUp 1s .5s ease both;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .4rem;
+    animation: fadeUp 1s .9s ease both;
+  }
+  .scroll-hint span {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .55rem;
+    letter-spacing: .25em;
+    color: rgba(253,246,240,.4);
+    text-transform: uppercase;
+  }
+  .scroll-dot {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+  /* ── QUOTE STRIP ── */
+  .quote-strip {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, var(--magenta), var(--rose));
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+  .quote-strip::before {
+    content: '"';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 18rem;
+    color: rgba(255,255,255,.05);
+    top: -3rem;
+    left: .5rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 5vw, 1.9rem);
+    line-height: 1.5;
+    max-width: 520px;
+    margin: 0 auto;
+    color: #fff;
+  }
+  .quote-author {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .7rem;
+    letter-spacing: .2em;
+    color: rgba(255,255,255,.65);
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  /* ── CARDS SECTION ── */
+  .section {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 1.5rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .6rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 7vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 2rem;
+  }
+  .section-title em { color: var(--blush); font-style: italic; }
+
+  /* virtue cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .9rem;
+  }
+
+  .card {
+    border-radius: 1rem;
+    padding: 1.3rem 1.1rem;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.04);
+    backdrop-filter: blur(8px);
+    transition: transform .3s ease, background .3s ease;
+    cursor: default;
+  }
+  .card:active { transform: scale(.97); }
+  .card-icon { font-size: 1.8rem; margin-bottom: .7rem; display: block; }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--blush);
+    margin-bottom: .3rem;
+  }
+  .card-desc {
+    font-size: .82rem;
+    line-height: 1.5;
+    color: rgba(253,246,240,.6);
+    font-weight: 300;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: .4rem;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--rose), var(--lilac), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+
+  .tl-dot {
+    position: absolute;
+    left: -1.65rem;
+    top: .25rem;
+    width: .55rem;
+    height: .55rem;
+    border-radius: 50%;
+    background: var(--rose);
+    border: 2px solid var(--blush);
+  }
+  .tl-year {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .15em;
+    color: var(--gold);
+    margin-bottom: .2rem;
+  }
+  .tl-text {
+    font-size: .9rem;
+    line-height: 1.55;
+    color: rgba(253,246,240,.75);
+  }
+
+  /* ── MESSAGE SECTION ── */
+  .message-section {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 1.5rem 5rem;
+    text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(192,48,74,.08));
+  }
+
+  .flower-ring {
+    font-size: 3.5rem;
+    animation: spin 8s linear infinite;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .message-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 8vw, 3rem);
+    font-style: italic;
+    line-height: 1.2;
+    max-width: 400px;
+    margin: 0 auto 1.2rem;
+    color: var(--cream);
+  }
+  .message-body {
+    font-size: clamp(.95rem, 3.5vw, 1.15rem);
+    line-height: 1.8;
+    color: rgba(253,246,240,.7);
+    max-width: 380px;
+    margin: 0 auto 2rem;
+    font-weight: 300;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--rose), var(--magenta));
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .85rem 2.2rem;
+    border-radius: 3rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s ease;
+    box-shadow: 0 8px 30px rgba(192,48,74,.4);
+  }
+  .cta-button:active { transform: scale(.97); }
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,.15);
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .cta-button:hover::before { opacity: 1; }
+
+  /* ── NAMES TICKER ── */
+  .ticker-wrap {
+    overflow: hidden;
+    padding: 1.5rem 0;
+    background: rgba(192,48,74,.12);
+    border-top: 1px solid rgba(192,48,74,.2);
+    border-bottom: 1px solid rgba(192,48,74,.2);
+    position: relative;
+    z-index: 1;
+  }
+  .ticker {
+    display: flex;
+    gap: 2rem;
+    animation: ticker 22s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .ticker-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(253,246,240,.55);
+    padding: 0 .5rem;
+  }
+  .ticker-name span { color: var(--rose); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: .08em;
+    color: var(--gold);
+    margin-bottom: .6rem;
+  }
+  .footer-sub {
+    font-size: .75rem;
+    color: rgba(253,246,240,.3);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: .1em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MEDIA ── */
+  @media (max-width: 360px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .big-number { font-size: 6.5rem; }
+  }
+  @media (min-width: 600px) {
+    .cards-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div id="particles"></div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="date-badge">8 de Marzo · 2026</div>
+  <div class="big-number">8</div>
+  <div class="month-line">de Marzo</div>
+  <div class="divider-line"></div>
+  <h1 class="hero-title">Día Internacional de la <em>Mujer</em></h1>
+  <p class="hero-sub">Un día para honrar su fuerza, su luz y todo lo que construye en silencio y en voz alta.</p>
+  <div class="scroll-hint">
+    <span>Explorar</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ── QUOTE ── -->
+<div class="quote-strip">
+  <p class="quote-text">"No somos el sexo débil. Somos el sexo que ha sido subestimado durante siglos."</p>
+  <p class="quote-author">— Gloria Steinem</p>
+</div>
+
+<!-- ── VIRTUDES ── -->
+<section class="section">
+  <p class="section-label">Lo que las define</p>
+  <h2 class="section-title">Fuerza que <em>transforma</em> el mundo</h2>
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🌹</span>
+      <div class="card-title">Amor</div>
+      <div class="card-desc">El amor que da sin medida y sin condición.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <div class="card-title">Valentía</div>
+      <div class="card-desc">Rompe barreras y abre caminos donde no los había.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌙</span>
+      <div class="card-title">Intuición</div>
+      <div class="card-desc">Ve lo que otros ignoran, siente lo que otros callan.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔥</span>
+      <div class="card-title">Pasión</div>
+      <div class="card-desc">Entrega total en todo lo que ama y decide.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌿</span>
+      <div class="card-title">Resiliencia</div>
+      <div class="card-desc">Se dobla con el viento pero jamás se rompe.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">✨</span>
+      <div class="card-title">Sabiduría</div>
+      <div class="card-desc">Aprende de cada cicatriz y enseña con cada palabra.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-name">Marie Curie <span>✦</span></span>
+    <span class="ticker-name">Frida Kahlo <span>✦</span></span>
+    <span class="ticker-name">Rosa Parks <span>✦</span></span>
+    <span class="ticker-name">Malala Yousafzai <span>✦</span></span>
+    <span class="ticker-name">Ada Lovelace <span>✦</span></span>
+    <span class="ticker-name">Simone de Beauvoir <span>✦</span></span>
+    <span class="ticker-name">Cleo de Merode <span>✦</span></span>
+    <span class="ticker-name">Rigoberta Menchú <span>✦</span></span>
+    <span class="ticker-name">Sor Juana Inés <span>✦</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-name">Marie Curie <span>✦</span></span>
+    <span class="ticker-name">Frida Kahlo <span>✦</span></span>
+    <span class="ticker-name">Rosa Parks <span>✦</span></span>
+    <span class="ticker-name">Malala Yousafzai <span>✦</span></span>
+    <span class="ticker-name">Ada Lovelace <span>✦</span></span>
+    <span class="ticker-name">Simone de Beauvoir <span>✦</span></span>
+    <span class="ticker-name">Cleo de Merode <span>✦</span></span>
+    <span class="ticker-name">Rigoberta Menchú <span>✦</span></span>
+    <span class="ticker-name">Sor Juana Inés <span>✦</span></span>
+  </div>
+</div>
+
+<!-- ── HISTORIA ── -->
+<section class="section">
+  <p class="section-label">Historia viva</p>
+  <h2 class="section-title">Hitos que <em>cambiaron</em> todo</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1857</div>
+      <div class="tl-text">Obreras textiles en Nueva York marchan exigiendo mejores condiciones laborales y jornadas dignas.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1903</div>
+      <div class="tl-text">Marie Curie se convierte en la primera mujer en ganar el Premio Nobel de Física.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1948</div>
+      <div class="tl-text">La Declaración Universal de Derechos Humanos proclama la igualdad de derechos entre hombres y mujeres.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">1975</div>
+      <div class="tl-text">Las Naciones Unidas establecen el 8 de marzo como el Día Internacional de la Mujer.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">Hoy</div>
+      <div class="tl-text">Millones de mujeres alrededor del mundo siguen escribiendo historia — incluida <strong>tú</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MESSAGE ── -->
+<section class="message-section">
+  <div class="flower-ring">🌸</div>
+  <h2 class="message-title">Gracias por existir exactamente como eres</h2>
+  <p class="message-body">
+    Cada mujer es un universo de historias, sueños y poder. Hoy y siempre, celebramos tu esencia, tu lucha y tu alegría. El mundo es más hermoso porque tú estás en él.
+  </p>
+  <button class="cta-button" onclick="showHeart()">Enviar amor 💖</button>
+  <p id="heart-msg" style="margin-top:1.2rem;font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--blush);min-height:1.5rem;transition:opacity .4s;opacity:0;"></p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">🌹 8M</div>
+  <p class="footer-sub">Día Internacional de la Mujer · 8 de Marzo</p>
+  <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05);">
+    <p style="font-family:'Montserrat',sans-serif;font-size:.55rem;letter-spacing:.28em;color:rgba(253,246,240,.25);text-transform:uppercase;margin-bottom:.4rem;">Desarrollado por</p>
+    <p style="font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:.22em;background:linear-gradient(135deg,var(--gold),var(--blush));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">M.I.F.CH</p>
+  </div>
+</footer>
+
+<script>
+// ── Petals ──
+(function(){
+  const container = document.getElementById('particles');
+  const colors = ['#c0304a','#f2a7bb','#d4a0c0','#c9a84c','#9b2354'];
+  for(let i = 0; i < 28; i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = 6 + Math.random()*12;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${Math.random()*100}%;
+      animation-duration:${7+Math.random()*10}s;
+      animation-delay:${Math.random()*8}s;
+      opacity:0;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+// ── Scroll reveal for timeline ──
+const items = document.querySelectorAll('.tl-item');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'), i*120);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold:.15});
+items.forEach(el=>obs.observe(el));
+
+// ── Heart button ──
+const msgs = [
+  '¡Feliz Día! 💖',
+  '¡Eres increíble! 🌹',
+  '¡Gracias por tu luz! ✨',
+  '¡El mundo te necesita! 🌸',
+  '¡Tu fuerza inspira! 🔥',
+];
+let idx = 0;
+function showHeart(){
+  const el = document.getElementById('heart-msg');
+  el.style.opacity = '0';
+  setTimeout(()=>{
+    el.textContent = msgs[idx % msgs.length];
+    el.style.opacity = '1';
+    idx++;
+  }, 250);
+}
+</script>
+</body>
+</html>
